@@ -1,0 +1,1522 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vijay Anand Natarajan — BI Portfolio</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0b0f;
+      --surface: #111318;
+      --card: #161b24;
+      --border: #1e2535;
+      --accent: #00d4ff;
+      --accent2: #7b61ff;
+      --accent3: #00ff9f;
+      --gold: #c9a84c;
+      --text: #e8eaf0;
+      --muted: #7a8299;
+      --dim: #3a4055;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Mono', monospace;
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ─── NOISE OVERLAY ─── */
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.4;
+    }
+
+    /* ─── NAV ─── */
+
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      padding: 1.2rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(10, 11, 15, 0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1rem;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+    }
+
+    .nav-links a {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    /* ─── HERO ─── */
+
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 0 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-grid-bg {
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 60px 60px;
+      opacity: 0.3;
+    }
+
+    .hero-glow {
+      position: absolute;
+      width: 700px;
+      height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 212, 255, 0.08) 0%, transparent 70%);
+      top: -200px;
+      right: -100px;
+      pointer-events: none;
+    }
+
+    .hero-glow2 {
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(123, 97, 255, 0.06) 0%, transparent 70%);
+      bottom: -150px;
+      left: 200px;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      max-width: 900px;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid rgba(0, 212, 255, 0.3);
+      padding: 0.4rem 1rem;
+      margin-bottom: 2rem;
+      animation: fadeUp 0.8s ease both;
+    }
+
+    .hero-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(3.5rem, 8vw, 7rem);
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+      animation: fadeUp 0.8s 0.1s ease both;
+    }
+
+    .hero-name span {
+      color: var(--accent);
+      font-style: italic;
+    }
+
+    .hero-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 2rem;
+      animation: fadeUp 0.8s 0.2s ease both;
+    }
+
+    .hero-summary {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 580px;
+      margin-bottom: 3rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: 1.3rem;
+      line-height: 1.6;
+      animation: fadeUp 0.8s 0.3s ease both;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 3rem;
+      animation: fadeUp 0.8s 0.4s ease both;
+    }
+
+    .stat-item {
+      text-align: left;
+    }
+
+    .stat-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 0.3rem;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 3rem;
+      animation: fadeUp 0.8s 0.5s ease both;
+    }
+
+    .btn-primary {
+      padding: 0.85rem 2rem;
+      background: var(--accent);
+      color: var(--bg);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .btn-primary:hover {
+      background: #00b8d9;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(0, 212, 255, 0.25);
+    }
+
+    .btn-ghost {
+      padding: 0.85rem 2rem;
+      border: 1px solid var(--dim);
+      color: var(--muted);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* ─── SECTIONS ─── */
+
+    section {
+      padding: 7rem 4rem;
+    }
+
+    .section-tag {
+      font-size: 0.65rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.8rem;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 4vw, 3.5rem);
+      font-weight: 300;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+
+    .section-title em {
+      color: var(--accent);
+      font-style: italic;
+    }
+
+    .section-divider {
+      width: 3rem;
+      height: 1px;
+      background: var(--accent);
+      margin-bottom: 3rem;
+    }
+
+    /* ─── SKILLS ─── */
+
+    #skills {
+      background: var(--surface);
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .skill-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 2rem;
+      position: relative;
+      transition: all 0.4s;
+      overflow: hidden;
+    }
+
+    .skill-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s;
+    }
+
+    .skill-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .skill-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+    }
+
+    .skill-icon {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .skill-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text);
+      margin-bottom: 1rem;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .tag {
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.7rem;
+      border: 1px solid var(--dim);
+      color: var(--muted);
+      transition: all 0.3s;
+    }
+
+    .tag:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* ─── EXPERIENCE ─── */
+
+    #experience {
+      background: var(--bg);
+    }
+
+    .exp-timeline {
+      position: relative;
+      margin-top: 3rem;
+    }
+
+    .exp-timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: var(--border);
+    }
+
+    .exp-item {
+      padding-left: 3rem;
+      margin-bottom: 5rem;
+      position: relative;
+    }
+
+    .exp-item::before {
+      content: '';
+      position: absolute;
+      left: -5px;
+      top: 8px;
+      width: 10px;
+      height: 10px;
+      background: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+    }
+
+    .exp-period {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .exp-role {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.2rem;
+    }
+
+    .exp-company {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+      font-style: italic;
+    }
+
+    .exp-bullets {
+      list-style: none;
+    }
+
+    .exp-bullets li {
+      font-size: 0.85rem;
+      color: var(--muted);
+      padding: 0.5rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+      border-bottom: 1px solid rgba(30, 37, 53, 0.5);
+    }
+
+    .exp-bullets li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 0.7rem;
+    }
+
+    .exp-bullets li strong {
+      color: var(--text);
+    }
+
+    .exp-metrics {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .metric {
+      background: rgba(0, 212, 255, 0.05);
+      border: 1px solid rgba(0, 212, 255, 0.15);
+      padding: 0.5rem 1.2rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+    }
+
+    .metric span {
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    /* ─── PROJECTS ─── */
+
+    #projects {
+      background: var(--surface);
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .project-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 2.5rem;
+      position: relative;
+      transition: all 0.4s;
+      overflow: hidden;
+    }
+
+    .project-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 0;
+      background: linear-gradient(180deg, transparent, rgba(0, 212, 255, 0.04));
+      transition: height 0.4s;
+    }
+
+    .project-card:hover::after {
+      height: 100%;
+    }
+
+    .project-card:hover {
+      border-color: rgba(0, 212, 255, 0.3);
+      transform: translateY(-4px);
+    }
+
+    .project-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem;
+      font-weight: 300;
+      color: var(--border);
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+
+    .project-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--text);
+      margin-bottom: 1rem;
+    }
+
+    .project-desc {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+      line-height: 1.7;
+    }
+
+    .project-impact {
+      font-size: 0.75rem;
+      color: var(--accent3);
+      letter-spacing: 0.1em;
+      border-left: 2px solid var(--accent3);
+      padding-left: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .project-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .stack-tag {
+      font-size: 0.55rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.6rem;
+      background: rgba(123, 97, 255, 0.1);
+      border: 1px solid rgba(123, 97, 255, 0.2);
+      color: var(--accent2);
+    }
+
+    /* ─── INNOVATION ─── */
+
+    #innovation {
+      background: var(--bg);
+    }
+
+    .innovation-intro {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      color: var(--muted);
+      max-width: 700px;
+      margin-bottom: 3rem;
+      line-height: 1.7;
+    }
+
+    .ideas-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .idea-card {
+      border: 1px solid var(--border);
+      padding: 2.5rem;
+      position: relative;
+      transition: all 0.4s;
+      background: var(--card);
+      overflow: hidden;
+    }
+
+    .idea-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3px;
+      height: 0;
+      background: linear-gradient(180deg, var(--accent2), var(--accent));
+      transition: height 0.5s;
+    }
+
+    .idea-card:hover::before {
+      height: 100%;
+    }
+
+    .idea-card:hover {
+      border-color: rgba(123, 97, 255, 0.3);
+    }
+
+    .idea-badge {
+      display: inline-block;
+      font-size: 0.55rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      border: 1px solid rgba(123, 97, 255, 0.3);
+      padding: 0.25rem 0.7rem;
+      margin-bottom: 1rem;
+    }
+
+    .idea-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 1rem;
+    }
+
+    .idea-desc {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+
+    .idea-outcome {
+      font-size: 0.72rem;
+      color: var(--accent3);
+      letter-spacing: 0.08em;
+    }
+
+    /* ─── ACHIEVEMENTS ─── */
+
+    #achievements {
+      background: var(--surface);
+    }
+
+    .achieve-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .achieve-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+      transition: all 0.4s;
+    }
+
+    .achieve-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(201, 168, 76, 0.08);
+    }
+
+    .achieve-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .achieve-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .achieve-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ─── EDUCATION ─── */
+
+    #education {
+      background: var(--bg);
+    }
+
+    .edu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .edu-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 2rem;
+      transition: all 0.3s;
+    }
+
+    .edu-card:hover {
+      border-color: var(--accent2);
+    }
+
+    .edu-degree {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--accent2);
+      margin-bottom: 0.4rem;
+    }
+
+    .edu-score {
+      font-size: 1.5rem;
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--text);
+      margin-bottom: 0.3rem;
+    }
+
+    .edu-inst {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-bottom: 0.2rem;
+    }
+
+    .edu-year {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      color: var(--dim);
+    }
+
+    /* ─── CONTACT ─── */
+
+    #contact {
+      background: var(--surface);
+      text-align: center;
+      padding: 7rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #contact::before {
+      content: '';
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 212, 255, 0.05) 0%, transparent 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .contact-tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 5vw, 4rem);
+      font-weight: 300;
+      margin-bottom: 1rem;
+      position: relative;
+    }
+
+    .contact-sub {
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      position: relative;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      transition: color 0.3s;
+      padding: 1rem 1.5rem;
+      border: 1px solid var(--border);
+      transition: all 0.3s;
+    }
+
+    .contact-link:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    /* ─── FOOTER ─── */
+
+    footer {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      padding: 2rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      color: var(--dim);
+      text-transform: uppercase;
+    }
+
+    /* ─── ANIMATIONS ─── */
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── SCROLLBAR ─── */
+
+    ::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--bg);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--dim);
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--accent);
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        padding: 1rem 1.5rem;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      section,
+      #hero {
+        padding: 4rem 1.5rem;
+      }
+
+      footer {
+        padding: 1.5rem;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .hero-stats {
+        flex-wrap: wrap;
+        gap: 1.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">V · A · N</div>
+    <div class="nav-links">
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#innovation">Innovation</a>
+      <a href="#achievements">Impact</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-grid-bg"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-glow2"></div>
+    <div class="hero-content">
+      <div class="hero-tag">BI Team Lead · Enterprise Analytics · Chennai, India</div>
+      <h1 class="hero-name">Vijay Anand<br><span>Natarajan</span></h1>
+      <p class="hero-title">Lead Power BI Developer &amp; Analytics Strategist</p>
+      <p class="hero-summary">
+        Turning raw enterprise data into decisions that move organisations forward — through precision engineering,
+        dimensional modelling, and intelligent automation.
+      </p>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-num">18+</div>
+          <div class="stat-label">Years Total</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">50+</div>
+          <div class="stat-label">Dashboards Built</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">40%</div>
+          <div class="stat-label">Report Speed Gain</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">75%</div>
+          <div class="stat-label">Manual Effort Saved</div>
+        </div>
+      </div>
+      <div class="hero-cta">
+        <a href="#projects" class="btn-primary">View My Work</a>
+        <a href="#contact" class="btn-ghost">Get in Touch</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-tag">// 01 — Expertise</div>
+    <h2 class="section-title">Core <em>Competencies</em></h2>
+    <div class="section-divider"></div>
+
+    <div class="skills-grid">
+      <div class="skill-card fade-up">
+        <div class="skill-icon">📊</div>
+        <div class="skill-name">BI &amp; Visualisation</div>
+        <div class="skill-tags">
+          <span class="tag">Power BI</span>
+          <span class="tag">Metabase</span>
+          <span class="tag">DAX</span>
+          <span class="tag">Power Query (M)</span>
+          <span class="tag">RLS</span>
+          <span class="tag">Governance</span>
+          <span class="tag">Performance Tuning</span>
+        </div>
+      </div>
+      <div class="skill-card fade-up">
+        <div class="skill-icon">🔄</div>
+        <div class="skill-name">Data Modelling</div>
+        <div class="skill-tags">
+          <span class="tag">Star Schema</span>
+          <span class="tag">Snowflake Schema</span>
+          <span class="tag">Dimensional Modelling</span>
+          <span class="tag">KPI Design</span>
+          <span class="tag">Data Governance</span>
+        </div>
+      </div>
+      <div class="skill-card fade-up">
+        <div class="skill-icon">⚙️</div>
+        <div class="skill-name">ETL &amp; Orchestration</div>
+        <div class="skill-tags">
+          <span class="tag">n8n</span>
+          <span class="tag">Talend Open Studio</span>
+          <span class="tag">SSIS</span>
+          <span class="tag">REST APIs</span>
+          <span class="tag">Scheduling</span>
+          <span class="tag">Automation</span>
+        </div>
+      </div>
+      <div class="skill-card fade-up">
+        <div class="skill-icon">☁️</div>
+        <div class="skill-name">Cloud &amp; Infrastructure</div>
+        <div class="skill-tags">
+          <span class="tag">Azure Synapse</span>
+          <span class="tag">Azure Data Lake</span>
+          <span class="tag">Azure SQL</span>
+          <span class="tag">Git / GitLab</span>
+          <span class="tag">Azure DevOps</span>
+        </div>
+      </div>
+      <div class="skill-card fade-up">
+        <div class="skill-icon">🗄️</div>
+        <div class="skill-name">Databases</div>
+        <div class="skill-tags">
+          <span class="tag">SQL Server</span>
+          <span class="tag">PostgreSQL</span>
+          <span class="tag">MySQL</span>
+          <span class="tag">Azure SQL</span>
+        </div>
+      </div>
+      <div class="skill-card fade-up">
+        <div class="skill-icon">🎯</div>
+        <div class="skill-name">Leadership &amp; Methods</div>
+        <div class="skill-tags">
+          <span class="tag">Team Lead</span>
+          <span class="tag">Agile / Scrum</span>
+          <span class="tag">Stakeholder Mgmt</span>
+          <span class="tag">JIRA</span>
+          <span class="tag">Confluence</span>
+          <span class="tag">Code Reviews</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="section-tag">// 02 — Career Journey</div>
+    <h2 class="section-title">Professional <em>Experience</em></h2>
+    <div class="section-divider"></div>
+
+    <div class="exp-timeline">
+
+      <!-- Role 1 -->
+      <div class="exp-item fade-up">
+        <div class="exp-period">Jan 2018 – Present · 7+ Years</div>
+        <div class="exp-role">Lead Power BI Developer &amp; Automation Team Lead</div>
+        <div class="exp-company">Bright River India Pvt. Ltd., Chennai</div>
+        <ul class="exp-bullets">
+          <li>Led a focused team of <strong>2 BI developers</strong>, overseeing full project lifecycle from stakeholder
+            requirements through delivery and post-launch refinement, serving clients across US and EU regions.</li>
+          <li>Architected and delivered <strong>50+ enterprise dashboards</strong> spanning operations, finance, and
+            sales — each grounded in dimensional models designed for clarity and query performance.</li>
+          <li>Drove the migration from <strong>SSRS to Power BI</strong>, eliminating approximately 15 hours of manual
+            report preparation per week through automation and scheduled subscriptions.</li>
+          <li>Engineered reusable <strong>Power BI template libraries</strong> and standardised DAX calculation
+            patterns, cutting new report build time by 35–45% and ensuring consistency across the analytics estate.</li>
+          <li>Connected Power BI reporting layers to <strong>Azure Data Lake and Synapse Analytics</strong>, enabling
+            near-real-time operational visibility for business stakeholders.</li>
+          <li>Introduced a <strong>code-review checklist and documentation gate</strong> process that raised first-pass
+            compliance to ≥95% and measurably reduced rework cycles across the team.</li>
+          <li>Partnered closely with business stakeholders to clarify and refine requirements upfront, <strong>reducing
+              specification churn by 25%</strong> and shortening overall time-to-delivery.</li>
+          <li>Designed and deployed <strong>ETL pipelines using n8n</strong> workflows to automate data population into
+            reporting layers, reducing manual data-handling effort by 75%.</li>
+          <li>Performed systematic <strong>DAX and query optimisation</strong>, cutting average report load times by 40%
+            through aggregation strategies, query folding, and data model restructuring.</li>
+          <li>Delivered <strong>UAT support and end-user training</strong> programmes, enabling business teams to
+            self-serve insights and reducing dependency on the BI team for routine queries.</li>
+        </ul>
+        <div class="exp-metrics">
+          <div class="metric">Load time reduced <span>40%</span></div>
+          <div class="metric">Manual effort cut <span>75%</span></div>
+          <div class="metric">Build time savings <span>35–45%</span></div>
+          <div class="metric">First-pass compliance <span>≥95%</span></div>
+          <div class="metric">Report prep saved <span>15 hrs/wk</span></div>
+        </div>
+      </div>
+
+      <!-- Role 2 -->
+      <div class="exp-item fade-up">
+        <div class="exp-period">March 2007 – Jan 2018 · ~11 Years</div>
+        <div class="exp-role">Adobe Automation Lead &amp; Team Manager</div>
+        <div class="exp-company">RR Donnelley India Outsource Pvt. Ltd., Chennai</div>
+        <ul class="exp-bullets">
+          <li>Managed a production team of <strong>30+ employees</strong>, covering scheduling, capacity planning,
+            quality control, training and client-facing coordination across international accounts.</li>
+          <li>Introduced <strong>innovative manufacturing processes</strong> that streamlined production workflows and
+            reduced turnaround times.</li>
+          <li>Developed and maintained a <strong>plant-level quality management system</strong>, creating measurable
+            standards for output consistency and compliance.</li>
+          <li>Built <strong>JavaScript-based automation scripts</strong> for live production workflows, reducing human
+            intervention in repetitive processing tasks.</li>
+          <li>Implemented <strong>Google Sheets dashboards</strong> to monitor team image quantities and output metrics
+            in real time — an early indicator of the data-driven leadership philosophy carried into subsequent roles.
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-tag">// 03 — Key Projects</div>
+    <h2 class="section-title">Featured <em>Deliverables</em></h2>
+    <div class="section-divider"></div>
+
+    <div class="projects-grid">
+
+      <div class="project-card fade-up">
+        <div class="project-number">01</div>
+        <div class="project-name">Salesforce → BI Platform Migration</div>
+        <div class="project-desc">
+          Consolidated the entire Salesforce reporting estate into Power BI and Metabase. Designed a unified data model
+          that preserved existing business logic while making reports faster and more accessible to non-technical
+          stakeholders.
+        </div>
+        <div class="project-impact">↑ 25% increase in stakeholder self-service adoption post-migration</div>
+        <div class="project-stack">
+          <span class="stack-tag">Power BI</span>
+          <span class="stack-tag">Metabase</span>
+          <span class="stack-tag">Salesforce</span>
+          <span class="stack-tag">DAX</span>
+          <span class="stack-tag">SQL Server</span>
+        </div>
+      </div>
+
+      <div class="project-card fade-up">
+        <div class="project-number">02</div>
+        <div class="project-name">CRM Data Migration: Salesforce → HubSpot</div>
+        <div class="project-desc">
+          Orchestrated a complete CRM migration moving contacts, leads, purchase orders, and contracts from Salesforce
+          into HubSpot. Included field-mapping validation, data deduplication, and a comprehensive audit trail to ensure
+          data integrity throughout.
+        </div>
+        <div class="project-impact">Zero data loss with full audit compliance across all migrated records</div>
+        <div class="project-stack">
+          <span class="stack-tag">HubSpot API</span>
+          <span class="stack-tag">Salesforce</span>
+          <span class="stack-tag">n8n</span>
+          <span class="stack-tag">PostgreSQL</span>
+          <span class="stack-tag">REST APIs</span>
+        </div>
+      </div>
+
+      <div class="project-card fade-up">
+        <div class="project-number">03</div>
+        <div class="project-name">Finance Cost Centre Dashboard Suite</div>
+        <div class="project-desc">
+          Developed a real-time cost centre reporting suite with drill-through navigation, enabling the CFO team to
+          analyse spending at department, cost centre, and line-item level. Extended the same framework to deliver
+          region-wise performance dashboards across
+          100+ store locations.
+        </div>
+        <div class="project-impact">↓ 60% reduction in insight-to-decision cycle time for the executive finance team
+        </div>
+        <div class="project-stack">
+          <span class="stack-tag">Power BI</span>
+          <span class="stack-tag">Azure Synapse</span>
+          <span class="stack-tag">DAX</span>
+          <span class="stack-tag">Star Schema</span>
+          <span class="stack-tag">RLS</span>
+        </div>
+      </div>
+
+      <div class="project-card fade-up">
+        <div class="project-number">04</div>
+        <div class="project-name">SLA Command Centre</div>
+        <div class="project-desc">
+          Built a real-time SLA monitoring dashboard with automated alerting for threshold breaches. Designed to surface
+          escalations proactively, giving operations teams the time to intervene before SLA violations occur rather than
+          reporting on them after the fact.
+        </div>
+        <div class="project-impact">99% SLA adherence rate sustained post-deployment</div>
+        <div class="project-stack">
+          <span class="stack-tag">Power BI</span>
+          <span class="stack-tag">Azure Data Lake</span>
+          <span class="stack-tag">Power Automate</span>
+          <span class="stack-tag">SQL Server</span>
+        </div>
+      </div>
+
+      <div class="project-card fade-up">
+        <div class="project-number">05</div>
+        <div class="project-name">OpenProject → Metabase Unified View</div>
+        <div class="project-desc">
+          Unified project management data from OpenProject into a single Metabase dashboard layer, eliminating the need
+          for manual status collation from multiple spreadsheets and emails. Stakeholders gained a live, consolidated
+          view of project health across all
+          active workstreams.
+        </div>
+        <div class="project-impact">↓ 75% reduction in manual status-reporting effort per reporting cycle</div>
+        <div class="project-stack">
+          <span class="stack-tag">Metabase</span>
+          <span class="stack-tag">OpenProject API</span>
+          <span class="stack-tag">PostgreSQL</span>
+          <span class="stack-tag">n8n</span>
+        </div>
+      </div>
+
+      <div class="project-card fade-up">
+        <div class="project-number">06</div>
+        <div class="project-name">Geo-Intelligence Production Dashboard</div>
+        <div class="project-desc">
+          Designed geographic dashboards overlaying production performance data onto regional maps, enabling leadership
+          to identify regional variance patterns, benchmark site performance, and route escalations to the right teams
+          based on location-specific insights.
+        </div>
+        <div class="project-impact">Enabled proactive regional escalation management replacing reactive email chains
+        </div>
+        <div class="project-stack">
+          <span class="stack-tag">Power BI Maps</span>
+          <span class="stack-tag">Azure Data Lake</span>
+          <span class="stack-tag">DAX</span>
+          <span class="stack-tag">Power Query</span>
+        </div>
+      </div>
+
+      <div class="project-card fade-up">
+        <div class="project-number">07</div>
+        <div class="project-name">Power BI Governance Framework</div>
+        <div class="project-desc">
+          Designed and implemented an organisation-wide BI governance programme covering naming conventions, dataset
+          ownership, version control through GitLab, report certification workflows, and a code-review gate —
+          transforming an ad-hoc reporting landscape into
+          a managed, auditable analytics platform.
+        </div>
+        <div class="project-impact">Standardised 50+ reports; first-pass compliance lifted to ≥95%</div>
+        <div class="project-stack">
+          <span class="stack-tag">Power BI Service</span>
+          <span class="stack-tag">GitLab</span>
+          <span class="stack-tag">Azure DevOps</span>
+          <span class="stack-tag">Confluence</span>
+        </div>
+      </div>
+
+      <div class="project-card fade-up">
+        <div class="project-number">08</div>
+        <div class="project-name">Automated Board Report Pipeline</div>
+        <div class="project-desc">
+          Automated the end-to-end generation and distribution of monthly board-level reports using Power BI
+          subscriptions and data refresh scheduling. Eliminated a previously manual, error-prone collation process that
+          consumed significant BI team bandwidth every
+          month.
+        </div>
+        <div class="project-impact">Monthly report prep time reduced from hours to near-zero with zero manual
+          touchpoints</div>
+        <div class="project-stack">
+          <span class="stack-tag">Power BI Subscriptions</span>
+          <span class="stack-tag">Azure Data Lake</span>
+          <span class="stack-tag">n8n</span>
+          <span class="stack-tag">SQL Server</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- INNOVATION -->
+  <section id="innovation">
+    <div class="section-tag">// 04 — Forward Thinking</div>
+    <h2 class="section-title">Innovation &amp; <em>Future Ideas</em></h2>
+    <div class="section-divider"></div>
+
+    <p class="innovation-intro">
+      Beyond delivery, the most exciting opportunities lie at the intersection of AI-augmented analytics and intelligent
+      process automation. The following concepts represent strategic directions I am actively developing and would bring
+      to any forward-thinking
+      analytics function.
+    </p>
+
+    <div class="ideas-grid">
+
+      <div class="idea-card fade-up">
+        <div class="idea-badge">🤖 AI Automation</div>
+        <div class="idea-title">NLP-Powered Business Intelligence Interface</div>
+        <div class="idea-desc">
+          Replace static filters with a conversational analytics layer — a natural language interface embedded into
+          existing Power BI or Metabase deployments. Business users type questions like "show me sales by region for Q3
+          compared to last year" and receive
+          dynamically generated charts and tables. This removes the barrier between business questions and data answers,
+          dramatically improving adoption among non-technical stakeholders.
+        </div>
+        <div class="idea-outcome">→ Projected: 50%+ increase in self-service dashboard adoption; reduction in ad-hoc BI
+          requests</div>
+      </div>
+
+      <div class="idea-card fade-up">
+        <div class="idea-badge">🔮 Predictive Analytics</div>
+        <div class="idea-title">AI-Driven Anomaly Detection &amp; Forecasting Layer</div>
+        <div class="idea-desc">
+          Integrate lightweight ML models (ARIMA / Prophet / Azure ML) directly into the existing reporting stack to
+          surface anomalies before they become incidents and generate forward-looking KPI forecasts. Rather than
+          building dashboards that show what happened,
+          this shifts the BI function toward showing what is likely to happen and why, fundamentally changing how
+          leadership engages with data.
+        </div>
+        <div class="idea-outcome">→ Projected: Earlier detection of financial variance and operational degradation;
+          proactive rather than reactive reporting</div>
+      </div>
+
+      <div class="idea-card fade-up">
+        <div class="idea-badge">⚡ Hyper-Automation</div>
+        <div class="idea-title">Intelligent n8n + AI ETL Orchestration</div>
+        <div class="idea-desc">
+          Extend existing n8n automation pipelines with AI-powered data classification and validation nodes. When
+          ingesting data from disparate sources, the pipeline automatically classifies records, flags inconsistencies,
+          suggests transformations, and routes exceptions
+          for human review — reducing the volume of manual data quality work that currently consumes analyst time before
+          reporting can begin.
+        </div>
+        <div class="idea-outcome">→ Projected: 60–80% reduction in data preparation rework; higher trust in downstream
+          reports</div>
+      </div>
+
+      <div class="idea-card fade-up">
+        <div class="idea-badge">📋 Auto-Documentation</div>
+        <div class="idea-title">Self-Documenting BI Asset Registry</div>
+        <div class="idea-desc">
+          Build an automated documentation engine that continuously scans Power BI datasets and Metabase questions,
+          extracts metadata, generates plain-English descriptions of what each measure calculates and why, and publishes
+          a searchable data catalogue. This
+          solves the chronic problem of undocumented BI assets that create knowledge silos and onboarding friction as
+          teams grow.
+        </div>
+        <div class="idea-outcome">→ Projected: Onboarding time for new BI team members reduced by half; elimination of
+          undocumented report sprawl</div>
+      </div>
+
+      <div class="idea-card fade-up">
+        <div class="idea-badge">🎯 Personalisation</div>
+        <div class="idea-title">Role-Adaptive Dashboard Intelligence</div>
+        <div class="idea-desc">
+          Design Power BI reports that adapt their layout, emphasis, and default filters based on the authenticated
+          user's role, location, and historical interaction patterns. A regional manager sees their region foregrounded
+          automatically. A CFO sees margin-first.
+          This contextual personalisation is technically achievable through RLS combined with usage analytics and
+          row-level defaults — and dramatically improves the signal-to-noise ratio for each user group.
+        </div>
+        <div class="idea-outcome">→ Projected: Higher report engagement; reduced time-to-insight for senior stakeholders
+        </div>
+      </div>
+
+      <div class="idea-card fade-up">
+        <div class="idea-badge">🔄 Smart Migration</div>
+        <div class="idea-title">AI-Assisted Legacy Report Modernisation</div>
+        <div class="idea-desc">
+          Apply LLM-based code analysis to scan legacy SSRS, Excel, and ad-hoc SQL report collections, automatically
+          identify duplicates and redundancies, map business logic to modern DAX equivalents, and generate migration
+          roadmaps prioritised by usage frequency
+          and business impact. This transforms what is typically a years-long manual migration project into a
+          structured, accelerated programme with measurable milestones.
+        </div>
+        <div class="idea-outcome">→ Projected: Migration timelines compressed by 40–60%; elimination of shadow reporting
+          that persists alongside official BI tools</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ACHIEVEMENTS -->
+  <section id="achievements">
+    <div class="section-tag">// 05 — Quantified Impact</div>
+    <h2 class="section-title">Key <em>Achievements</em></h2>
+    <div class="section-divider"></div>
+
+    <div class="achieve-grid">
+      <div class="achieve-card fade-up">
+        <div class="achieve-icon">📈</div>
+        <div class="achieve-num">40%</div>
+        <div class="achieve-label">Report Load Time Reduction</div>
+      </div>
+      <div class="achieve-card fade-up">
+        <div class="achieve-icon">⚡</div>
+        <div class="achieve-num">75%</div>
+        <div class="achieve-label">Manual ETL Effort Eliminated</div>
+      </div>
+      <div class="achieve-card fade-up">
+        <div class="achieve-icon">📊</div>
+        <div class="achieve-num">50+</div>
+        <div class="achieve-label">Enterprise Dashboards Delivered</div>
+      </div>
+      <div class="achieve-card fade-up">
+        <div class="achieve-icon">✅</div>
+        <div class="achieve-num">≥95%</div>
+        <div class="achieve-label">First-Pass Code Compliance</div>
+      </div>
+      <div class="achieve-card fade-up">
+        <div class="achieve-icon">⏱️</div>
+        <div class="achieve-num">15 hrs</div>
+        <div class="achieve-label">Weekly Report Prep Saved</div>
+      </div>
+      <div class="achieve-card fade-up">
+        <div class="achieve-icon">🏪</div>
+        <div class="achieve-num">100+</div>
+        <div class="achieve-label">Store Locations Covered</div>
+      </div>
+      <div class="achieve-card fade-up">
+        <div class="achieve-icon">⚙️</div>
+        <div class="achieve-num">35–45%</div>
+        <div class="achieve-label">New Report Build Time Saved</div>
+      </div>
+      <div class="achieve-card fade-up">
+        <div class="achieve-icon">🎯</div>
+        <div class="achieve-num">99%</div>
+        <div class="achieve-label">SLA Adherence Achieved</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="section-tag">// 06 — Academic Background</div>
+    <h2 class="section-title">Education &amp; <em>Certifications</em></h2>
+    <div class="section-divider"></div>
+
+    <div class="edu-grid">
+      <div class="edu-card fade-up">
+        <div class="edu-degree">MCA — Master of Computer Applications</div>
+        <div class="edu-score">73%</div>
+        <div class="edu-inst">Bharathidhasan University, Trichy</div>
+        <div class="edu-year">2002 – 2005</div>
+      </div>
+      <div class="edu-card fade-up">
+        <div class="edu-degree">PGDCA — Post-Graduate Diploma in Computer Applications</div>
+        <div class="edu-score">84%</div>
+        <div class="edu-inst">H.H. Rajah's College, Pudukkottai</div>
+        <div class="edu-year">2002 – 2003</div>
+      </div>
+      <div class="edu-card fade-up">
+        <div class="edu-degree">BSc. Computer Science</div>
+        <div class="edu-score">68.7%</div>
+        <div class="edu-inst">H.H. Rajah's College, Pudukkottai</div>
+        <div class="edu-year">1999 – 2002</div>
+      </div>
+      <div class="edu-card fade-up" style="border-color: rgba(0,212,255,0.2); background: rgba(0,212,255,0.03);">
+        <div class="edu-degree" style="color: var(--accent);">Microsoft Certifications</div>
+        <div class="edu-score" style="font-size: 1rem; color: var(--text); margin-top: 0.5rem;">PL-300 · DP-900 · DP-203
+        </div>
+        <div class="edu-inst" style="margin-top: 0.5rem;">Power BI · Azure Data Fundamentals · Azure Data Engineering
+        </div>
+        <div class="edu-year" style="color: var(--accent); margin-top: 0.5rem;">In Progress / Pursuing</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <h2 class="contact-tagline">Let's build something <em
+        style="color:var(--accent); font-family:'Cormorant Garamond',serif;">intelligent</em></h2>
+    <p class="contact-sub">Open to senior BI roles, analytics consulting, and AI-augmented data projects.</p>
+    <div class="contact-links">
+      <a href="tel:+919884313061" class="contact-link">
+        📞 +91-9884313061
+      </a>
+      <a href="mailto:yajiv@email.com" class="contact-link">
+        ✉️ yajiv@email.com
+      </a>
+      <a href="https://www.linkedin.com/in/vijay-anand-natarajan-21807618/" target="_blank" class="contact-link">
+        🔗 LinkedIn Profile
+      </a>
+      <a href="#" class="contact-link">
+        📍 Chennai, India
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span>© 2025 Vijay Anand Natarajan</span>
+    <span>BI Team Lead · Power BI · Azure Analytics</span>
+    <span>Chennai, India</span>
+  </footer>
+
+  <script>
+    // Intersection Observer for fade-up animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, 80 * (entry.target.dataset.delay || 0));
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.1
+    });
+
+    document.querySelectorAll('.fade-up').forEach((el, i) => {
+      el.dataset.delay = i % 4;
+      observer.observe(el);
+    });
+
+    // Active nav link highlight
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(s => {
+        if (window.scrollY >= s.offsetTop - 120) current = s.id;
+      });
+      navLinks.forEach(a => {
+        a.style.color = a.getAttribute('href') === `#${current}` ? 'var(--accent)' : '';
+      });
+    });
+  </script>
+</body>
+
+</html>
